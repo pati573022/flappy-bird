@@ -5,13 +5,14 @@
              Shell.NavBarIsVisible="false">
 
     <Grid>
-    <Image Source="fundo.png"
-    Aspect="AspectFill"
-    HorizontalOptions="Fill"
-    VerticalOptions="Fill"/>
+    <Image  Source="fundo.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"/>
 
 
     <Image Source="passaro.png"
+    x:Name="passaro"
     Margin="10"
     HeightRequest="50"
     WidthRequest="50"
