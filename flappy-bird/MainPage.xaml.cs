@@ -1,4 +1,5 @@
 ﻿using System.Threading.Channels;
+using Windows.ApplicationModel.Search.Core;
 
 namespace flappy_bird;
 
@@ -16,6 +17,7 @@ int tempoPulando = 0;
 bool estaPulando = false;
 const int forcaPulo = 40;
 const int aberturaMin = 100;
+int score = 0;
 	public MainPage()
 	{
 		InitializeComponent();
@@ -76,6 +78,8 @@ const int aberturaMin = 100;
 			var alturaMin=-imgCanobaixo.HeightRequest;
 			imgCanocima.TranslationY = Random.Shared.Next((int)alturaMin, (int)alturaMax);
 			imgCanobaixo.TranslationY = imgCanocima.TranslationY + alturaMin + aberturaMin + imgCanobaixo.HeightRequest;
+			score++;
+			labelScore.Text="Canos:" + score.ToString("D3");
 		}
 
 	}
