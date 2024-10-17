@@ -15,6 +15,7 @@ const int maxTempoPulando = 2;
 int tempoPulando = 0;
 bool estaPulando = false;
 const int forcaPulo = 40;
+const int aberturaMin = 100;
 	public MainPage()
 	{
 		InitializeComponent();
@@ -71,6 +72,10 @@ const int forcaPulo = 40;
 		{
 			imgCanobaixo.TranslationX=0;
 			imgCanocima.TranslationX=0;
+			var alturaMax=-100;
+			var alturaMin=-imgCanobaixo.HeightRequest;
+			imgCanocima.TranslationY = Random.Shared.Next((int)alturaMin, (int)alturaMax);
+			imgCanobaixo.TranslationY = imgCanocima.TranslationY + alturaMin + aberturaMin + imgCanobaixo.HeightRequest;
 		}
 
 	}
