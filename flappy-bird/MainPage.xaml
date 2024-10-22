@@ -5,61 +5,56 @@
              Shell.NavBarIsVisible="false">
 
     <Grid>
-    <Label x:Name="labelScore"/>
-    <Image  Source="fundo.png"
-            Aspect="AspectFill"
-            HorizontalOptions="Fill"
-            VerticalOptions="Fill"/>
-
-
-    <Image Source="passaro.png"
-    x:Name="passaro"
-    Margin="10"
-    HeightRequest="50"
-    WidthRequest="50"
-    HorizontalOptions="Start"/>
-
-
-    <Image Source ="cano.png"
-    x:Name="imgCanocima"
-    HeightRequest="300"
-    HorizontalOptions="End"
-    VerticalOptions="Start"/>
-
-
-    <Image Source="canobaixo.png"
-    x:Name="imgCanobaixo"
-     HeightRequest="300"
-    HorizontalOptions="End"
-    VerticalOptions="End"/>
-
-    <Image Source="chao.png"
-    HeightRequest="150"
-    Aspect="AspectFill"
-    x:Name="imgchao"
-    HorizontalOptions="Fill"
-    VerticalOptions="End"/>
-
-    <Frame x:Name="frameGameOver"
-    Background="#99000000"
-    HorizontalOptions="Fill"
-    VerticalOptions="Fill">
-    
-    <Frame.GestureRecognizers>
-        <TapGestureRecognizer Tapped="OnGameOverClicked"/>
-    </Frame.GestureRecognizers>
-
-    <Image Source ="gameover2.png"/>
-
-    </Frame>
-
-    <Grid.GestureRecognizers>
-        <TapGestureRecognizer Tapped="PatyChataDesmais"/>
+     <Grid.GestureRecognizers>
+        <TapGestureRecognizer Tapped="PassaroSobe"/>
     </Grid.GestureRecognizers>
 
+        <Label x:Name="labelScore"/>
+        <Image  Source="fundo.png"
+                Aspect="AspectFill"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"/>
 
 
+        <Image Source="passaro.png"
+               x:Name="passaro"
+               Margin="10"
+               HeightRequest="50"
+               WidthRequest="50"
+               HorizontalOptions="Start"/>
 
+
+        <Image Source="cano.png"
+               x:Name="imgCanocima"
+               HeightRequest="300"
+               HorizontalOptions="End"
+               VerticalOptions="Start"/>
+
+
+        <Image Source="canobaixo.png"
+               x:Name="imgCanobaixo"
+               HeightRequest="300"
+               HorizontalOptions="End"
+               VerticalOptions="End"/>
+
+        <Image Source="chao.png"
+               HeightRequest="150"
+               Aspect="AspectFill"
+               x:Name="imgchao"
+               HorizontalOptions="Fill"
+               VerticalOptions="End"/>
+
+        <Frame x:Name="frameGameOver"
+               Background="#99000000"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnGameOverClicked"/>
+            </Frame.GestureRecognizers>
+
+            <Image Source="gameover2.png"/>
+
+            </Frame>
 
     </Grid>
 </ContentPage>

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Channels;
 using Windows.ApplicationModel.Search.Core;
+using Windows.UI.Input;
 
 namespace flappy_bird;
 
@@ -84,7 +85,7 @@ public partial class MainPage : ContentPage
 
 	}
 
-	void OnGameOverClicked(object s, TappedEventArgs a)
+	void OnGameOverClicked(object s, TappedEventArgs e)
 	{
 		frameGameOver.IsVisible = false;
 		Inicializar();
@@ -125,31 +126,40 @@ public partial class MainPage : ContentPage
 		if (!estaMorto)
 		{
 			if (VerificaColisaoTeto() ||
-			VerificaColisaoChao() ||
+				VerificaColisaoChao() ||
 				VerificaColisaoCanocima())
 				return true;
-			else
-				return false;
 		}
-		void AplicaPulo(object s, TappedEventArgs a)
+		return false;
+	}
+	void AplicaPulo()
+	{
+		passaro.TranslationY -=forcaPulo;
+		tempoPulando++;
+		if(tempoPulando >= maxTempoPulando)
 		{
-			estaPulando = true;
+			estaPulando=false;
+			tempoPulando=0;
 		}
-		bool VerificaColisaoCanocima()
-		{
-			var posHpassaro = (larguraJanela / 2) - (passaro.WidthRequest / 2);
-			var posVpassaro = (alturaJanela / 2) - (passaro.HeightRequest / 2) + passaro.TranslationY;
-			if (posHpassaro >= Math.Abs(imgCanocima.TranslationX) - imgCanocima.WidthRequest &&
-			posHpassaro <= Math.Abs(imgCanocima.TranslationX) + imgCanocima.WidthRequest &&
-			posVpassaro <= imgCanocima.HeightRequest + imgCanocima.TranslationY)
+	}
+	bool VerificaColisaoCanocima()
+	{
+		var posHpassaro = (larguraJanela / 2) - (passaro.WidthRequest / 2);
+		var posVpassaro = (alturaJanela / 2) - (passaro.HeightRequest / 2) + passaro.TranslationY;
+		if (posHpassaro >= Math.Abs(imgCanocima.TranslationX) - imgCanocima.WidthRequest &&
+		posHpassaro <= Math.Abs(imgCanocima.TranslationX) + imgCanocima.WidthRequest &&
+		posVpassaro <= imgCanocima.HeightRequest + imgCanocima.TranslationY)
 
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+		{
+			return true;
 		}
+		else
+		{
+			return false;
+		}
+	}
+	void PassaroSobe (object sender, EventArgs e)
+	{
+		estaPulando=true;
 	}
 }
