@@ -80,12 +80,16 @@ public partial class MainPage : ContentPage
 			imgCanocima.TranslationY = Random.Shared.Next((int)alturaMin, (int)alturaMax);
 			imgCanobaixo.TranslationY = imgCanocima.TranslationY + alturaMin + aberturaMin + imgCanobaixo.HeightRequest;
 			score++;
+			if (score % 2 ==0)
+			{
+				velocidade++;
+			}
 			labelScore.Text = "Canos:" + score.ToString("D3");
 		}
 
 	}
 
-	void OnGameOverClicked(object s, TappedEventArgs e)
+	void OnGameOverClicked(object s, EventArgs e)
 	{
 		frameGameOver.IsVisible = false;
 		Inicializar();
@@ -95,10 +99,8 @@ public partial class MainPage : ContentPage
 	void Inicializar()
 	{
 		estaMorto = false;
-		passaro.TranslationY = 0;
 		imgCanocima.TranslationX = -larguraJanela;
 		imgCanobaixo.TranslationX = -larguraJanela;
-		passaro.TranslationX = 0;
 		passaro.TranslationY = 0;
 		score = 0;
 		GerenciaCanos();
@@ -123,33 +125,38 @@ public partial class MainPage : ContentPage
 	}
 	bool VerificaColisao()
 	{
-		if (!estaMorto)
-		{
-			if (VerificaColisaoTeto() ||
-				VerificaColisaoChao() ||
-				VerificaColisaoCanocima())
-				return true;
-		}
-		return false;
+	
+	return VerificaColisaoTeto()||
+	       VerificaColisaoChao()||
+		   VerificaColisaoCanocima()||
+		   VerificaColisaoCanobaixo();
+	
 	}
-	void AplicaPulo()
-	{
-		passaro.TranslationY -=forcaPulo;
-		tempoPulando++;
-		if(tempoPulando >= maxTempoPulando)
+	 
+		bool VerificaColisaoCanocima()
 		{
-			estaPulando=false;
-			tempoPulando=0;
-		}
-	}
-	bool VerificaColisaoCanocima()
-	{
 		var posHpassaro = (larguraJanela / 2) - (passaro.WidthRequest / 2);
 		var posVpassaro = (alturaJanela / 2) - (passaro.HeightRequest / 2) + passaro.TranslationY;
 		if (posHpassaro >= Math.Abs(imgCanocima.TranslationX) - imgCanocima.WidthRequest &&
-		posHpassaro <= Math.Abs(imgCanocima.TranslationX) + imgCanocima.WidthRequest &&
-		posVpassaro <= imgCanocima.HeightRequest + imgCanocima.TranslationY)
+		    posHpassaro <= Math.Abs(imgCanocima.TranslationX) + imgCanocima.WidthRequest &&
+		    posVpassaro <= imgCanocima.HeightRequest + imgCanocima.TranslationY)
 
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	bool VerificaColisaoCanobaixo()
+	{
+		var posHpassaro = (larguraJanela/2) - (passaro.WidthRequest /2);
+		var posVpassaro = (alturaJanela/2) + (passaro.HeightRequest /2) + passaro.TranslationY;
+		var yMaxCano = imgCanocima.HeightRequest + imgCanocima.TranslationY + aberturaMin;
+		if (posHpassaro >= Math.Abs(imgCanobaixo.TranslationX) - imgCanobaixo.WidthRequest &&
+		    posHpassaro <= Math.Abs(imgCanobaixo.TranslationX) + imgCanobaixo.WidthRequest &&
+		    posVpassaro >= yMaxCano)
 		{
 			return true;
 		}
@@ -162,4 +169,7 @@ public partial class MainPage : ContentPage
 	{
 		estaPulando=true;
 	}
+
+	
+
 }
