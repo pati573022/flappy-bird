@@ -1,14 +1,13 @@
 ﻿using System.Threading.Channels;
-using Windows.ApplicationModel.Search.Core;
-using Windows.UI.Input;
+
 
 namespace flappy_bird;
 
 public partial class MainPage : ContentPage
 {
 
-	const int gravidade = 8;
-	const int tempoEntreFrames = 25;
+	const int gravidade = 20;
+	const int tempoEntreFrames = 50;
 	bool estaMorto = true;
 	double larguraJanela = 0;
 	double alturaJanela = 0;
@@ -17,7 +16,7 @@ public partial class MainPage : ContentPage
 	int tempoPulando = 0;
 	bool estaPulando = false;
 	const int forcaPulo = 40;
-	const int aberturaMin = 100;
+	const int aberturaMin = 200;
 	int score = 0;
 	public MainPage()
 	{
@@ -80,7 +79,7 @@ public partial class MainPage : ContentPage
 			imgCanocima.TranslationY = Random.Shared.Next((int)alturaMin, (int)alturaMax);
 			imgCanobaixo.TranslationY = imgCanocima.TranslationY + alturaMin + aberturaMin + imgCanobaixo.HeightRequest;
 			score++;
-			if (score % 2 ==0)
+			if (score % 4 ==0)
 			{
 				velocidade++;
 			}
@@ -135,7 +134,7 @@ public partial class MainPage : ContentPage
 	 
 		bool VerificaColisaoCanocima()
 		{
-		var posHpassaro = (larguraJanela / 2) - (passaro.WidthRequest / 2);
+		var posHpassaro = (larguraJanela / 50) - (passaro.WidthRequest / 2);
 		var posVpassaro = (alturaJanela / 2) - (passaro.HeightRequest / 2) + passaro.TranslationY;
 		if (posHpassaro >= Math.Abs(imgCanocima.TranslationX) - imgCanocima.WidthRequest &&
 		    posHpassaro <= Math.Abs(imgCanocima.TranslationX) + imgCanocima.WidthRequest &&
@@ -151,7 +150,7 @@ public partial class MainPage : ContentPage
 	}
 	bool VerificaColisaoCanobaixo()
 	{
-		var posHpassaro = (larguraJanela/2) - (passaro.WidthRequest /2);
+		var posHpassaro = (larguraJanela/50) - (passaro.WidthRequest /2);
 		var posVpassaro = (alturaJanela/2) + (passaro.HeightRequest /2) + passaro.TranslationY;
 		var yMaxCano = imgCanocima.HeightRequest + imgCanocima.TranslationY + aberturaMin;
 		if (posHpassaro >= Math.Abs(imgCanobaixo.TranslationX) - imgCanobaixo.WidthRequest &&
